@@ -1,41 +1,26 @@
 import {
+  HistoryIcon,
   HouseIcon,
   SettingsIcon,
   SunIcon,
   TimerIcon,
-  TimerResetIcon,
 } from "lucide-react";
 import { Container } from "./Components/Container";
 import { Heading } from "./Components/Heading";
+import { Logo } from "./Components/Logo";
+
 import "./style/global.css";
 import "./style/theme.css";
+import { Menu } from "./Components/Menu";
 
 export function App() {
   return (
     <>
       <Container>
-        <Heading>
-          <TimerIcon size={50} />
-        </Heading>
+        <Logo />
       </Container>
       <Container>
-        <Heading>Chronos</Heading>
-      </Container>
-      <Container>
-        <Heading>
-          <button>
-            <HouseIcon />
-          </button>
-          <button>
-            <TimerResetIcon />
-          </button>
-          <button>
-            <SettingsIcon />
-          </button>
-          <button>
-            <SunIcon />
-          </button>
-        </Heading>
+        <Menu />
       </Container>
     </>
   );

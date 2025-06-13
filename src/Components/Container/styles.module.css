@@ -1,6 +1,7 @@
 .container {
-  max-width: 98rem;
+  /* max-width: 98rem; */
   margin: 2rem;
+  font-size: 2.8rem;
 }
 .content {
   margin: 3.2rem;
