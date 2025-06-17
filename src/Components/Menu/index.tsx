@@ -5,21 +5,19 @@ import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from "lucide-react";
 
 export function Menu() {
   return (
-    <div className={styles.menu}>
+    <nav className={styles.menu}>
       <a className={styles.menuLink} href="#">
-        <button>
-          <HouseIcon />
-        </button>
-        <button>
-          <HistoryIcon />
-        </button>
-        <button>
-          <SettingsIcon />
-        </button>
-        <button>
-          <SunIcon />
-        </button>
+        <HouseIcon />
       </a>
-    </div>
+      <a className={styles.menuLink} href="#">
+        <HistoryIcon />
+      </a>
+      <a className={styles.menuLink} href="#">
+        <SettingsIcon />
+      </a>
+      <a className={styles.menuLink} href="#">
+        <SunIcon />
+      </a>
+    </nav>
   );
 }

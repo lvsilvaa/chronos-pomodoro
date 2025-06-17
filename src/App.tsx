@@ -1,17 +1,11 @@
-import {
-  HistoryIcon,
-  HouseIcon,
-  SettingsIcon,
-  SunIcon,
-  TimerIcon,
-} from "lucide-react";
 import { Container } from "./Components/Container";
-import { Heading } from "./Components/Heading";
 import { Logo } from "./Components/Logo";
+import { Menu } from "./Components/Menu";
+import { CountDown } from "./Components/CountDown";
 
 import "./style/global.css";
 import "./style/theme.css";
-import { Menu } from "./Components/Menu";
+import { DefaultInput } from "./Components/DefaultInput";
 
 export function App() {
   return (
@@ -21,6 +15,31 @@ export function App() {
       </Container>
       <Container>
         <Menu />
+      </Container>
+      <Container>
+        <CountDown />
+      </Container>
+      <Container>
+        <form className="form" action="">
+          <div className="formRow">
+            <DefaultInput
+              labelText="Task:"
+              id="meuInput"
+              type="text"
+              placeholder="Test"
+            />
+          </div>
+          <div className="formRow">
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
+          <div className="formRow">
+            <p>Ciclos</p>
+            <p>0 0 0 0 0 0 0 0 0 0</p>
+          </div>
+          <div className="formRow">
+            <button>Enviar</button>
+          </div>
+        </form>
       </Container>
     </>
   );

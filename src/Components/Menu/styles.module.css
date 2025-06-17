@@ -2,33 +2,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.4rem;
-  padding-top: 3.2rem;
+  gap: 1.6rem;
 }
 
 .menuLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  font-size: 4.2rem;
-  font-weight: bold;
+  background-color: var(--primary);
+  color: var(--text-over-primary);
   text-decoration: none;
   transition: all 0.1s ease-in-out;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
 }
 
 .menuLink:hover {
-  filter: brightness(50%);
+  filter: brightness(80%);
 }
 
-.menuLink svg {
-  width: 2.5rem;
-  height: 2.5rem;
-}
-button {
-  background-color: var(--primary);
-  border-radius: 1rem;
-  border: 5rem;
-  width: 5rem;
-  height: 5rem;
-}
+/*.menuLink svg {
+  width: 4rem;
+  height: 4rem;
+}*/
