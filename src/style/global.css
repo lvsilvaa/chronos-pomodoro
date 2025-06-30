@@ -26,6 +26,7 @@ body {
 }
 form {
   display: flex;
+  font-size: 1.6rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
