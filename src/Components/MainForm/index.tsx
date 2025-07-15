@@ -2,14 +2,52 @@ import { PlayCircleIcon } from "lucide-react";
 import { Cyrcles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
-/*import type { HomeProps } from "../../pages/Home";*/
 
 import "../../style/global.css";
 import { useTaskContext } from "../../Contexts/useTaskContext";
+import { useRef /*useState*/ } from "react";
+import type { taskModel } from "../../models/taskModel";
 
-export function MainForm(/*{ state }: HomeProps*/) {
+export function MainForm() {
+  const { setState } = useTaskContext();
+  /* const [taskName, setTaskName] = useState(""); Forma Controlada */
+  const taskInputName = useRef<HTMLInputElement>(null); // Nao controlada Salva em referencia
+
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); //Não seue o link
+
+    if (taskInputName.current === null) return;
+
+    const taskName = taskInputName.current.value.trim();
+
+    if (!taskName) {
+      alert("Digite o nome da tarefa");
+      return;
+    }
+
+    const newTask: taskModel = {
+      id: Date.now().toString(),
+      name: taskName,
+      startDate: Date.now(),
+      completDate: null,
+      interruptDate: null,
+      duration: 1,
+      type: "working",
+    };
+
+    const secondsRemaining = newTask.duration * 60;
+
+    setState((prevState) => {
+      return {
+        ...prevState,
+        config: { ...prevState.config },
+        activeTask: newTask,
+        currentCycle: 1, // conferir depois
+        secondsRemaining,
+        formattedSecondsRemaining: "00:00",
+        tasks: [...prevState.tasks, newTask],
+      };
+    });
   }
 
   const { state } = useTaskContext();
@@ -21,6 +59,10 @@ export function MainForm(/*{ state }: HomeProps*/) {
           id="meuInput"
           type="text"
           placeholder="Ex. Estudar para prova"
+          ref={taskInputName}
+
+          /*value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}*/
         />
       </div>
       <div className="formRow">
