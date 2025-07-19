@@ -1,4 +1,4 @@
-import { PlayCircleIcon } from "lucide-react";
+import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { Cyrcles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
@@ -6,12 +6,19 @@ import { DefaultInput } from "../DefaultInput";
 import "../../style/global.css";
 import { useTaskContext } from "../../Contexts/useTaskContext";
 import { useRef /*useState*/ } from "react";
-import type { taskModel } from "../../models/taskModel";
+import { getNextCycle } from "../../util/getNextCycle";
+import type { TaskModel } from "../../models/TaskModel";
+import { getNextCycleType } from "../../util/getNextCycleType";
+import { formatSecondsToMinutes } from "../../util/formatSecondsToMinutes";
 
 export function MainForm() {
-  const { setState } = useTaskContext();
+  const { state, setState } = useTaskContext();
   /* const [taskName, setTaskName] = useState(""); Forma Controlada */
   const taskInputName = useRef<HTMLInputElement>(null); // Nao controlada Salva em referencia
+
+  // ciclos
+  const nextCycle = getNextCycle(state.currentCycle);
+  const nextCycleType = getNextCycleType(nextCycle);
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); //Não seue o link
@@ -25,14 +32,14 @@ export function MainForm() {
       return;
     }
 
-    const newTask: taskModel = {
+    const newTask: TaskModel = {
       id: Date.now().toString(),
       name: taskName,
       startDate: Date.now(),
       completDate: null,
       interruptDate: null,
-      duration: 1,
-      type: "working",
+      duration: state.config[nextCycleType],
+      type: nextCycleType,
     };
 
     const secondsRemaining = newTask.duration * 60;
@@ -42,15 +49,30 @@ export function MainForm() {
         ...prevState,
         config: { ...prevState.config },
         activeTask: newTask,
-        currentCycle: 1, // conferir depois
+        currentCycle: nextCycle,
         secondsRemaining,
-        formattedSecondsRemaining: "00:00",
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
         tasks: [...prevState.tasks, newTask],
       };
     });
   }
+  function handleInterruptTask() {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: "00:00",
+        tasks: prevState.tasks.map((task) => {
+          if (prevState.activeTask && prevState.activeTask.id === task.id) {
+            return { ...task, interruptDate: Date.now() };
+          }
+          return task;
+        }),
+      };
+    });
+  }
 
-  const { state } = useTaskContext();
   return (
     <form onSubmit={handleCreateNewTask} className="form" action="">
       <div className="formRow">
@@ -60,19 +82,40 @@ export function MainForm() {
           type="text"
           placeholder="Ex. Estudar para prova"
           ref={taskInputName}
+          disabled={!!state.activeTask}
 
           /*value={taskName}
           onChange={(e) => setTaskName(e.target.value)}*/
         />
       </div>
       <div className="formRow">
-        <p>Mantenha-se em foco por {state.config.working} min</p>
+        <p>Mantenha-se em foco por {state.config.workTime} min</p>
       </div>
+      {state.currentCycle > 0 && (
+        <div className="formRow">
+          <Cyrcles />
+        </div>
+      )}
       <div className="formRow">
-        <Cyrcles />
-      </div>
-      <div className="formRow">
-        <DefaultButton icon={<PlayCircleIcon />} />
+        {!state.activeTask ? (
+          <DefaultButton
+            aria-label="Iniciar nova Tarefa"
+            title="Iniciar nova Tarefa"
+            type="submit"
+            icon={<PlayCircleIcon />}
+            key="submit button"
+          />
+        ) : (
+          <DefaultButton
+            aria-label="Parar Tarefa"
+            title="Parar Tarefa"
+            type="button"
+            color="red"
+            icon={<StopCircleIcon />}
+            onClick={handleInterruptTask}
+            key="Not send form"
+          />
+        )}
       </div>
     </form>
   );

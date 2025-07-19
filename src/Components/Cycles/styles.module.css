@@ -21,6 +21,6 @@
 .shortBreakTime {
   background-color: var(--success);
 }
-.longBrakTime {
+.longBreakTime {
   background-color: var(--info);
 }

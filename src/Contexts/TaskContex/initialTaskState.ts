@@ -1,4 +1,4 @@
-import type { TaskStateModel } from "../../models/taskStateModel";
+import type { TaskStateModel } from "../../models/TaskStateModel";
 
 export const initialTaskState: TaskStateModel = {
   tasks: [],
@@ -7,7 +7,7 @@ export const initialTaskState: TaskStateModel = {
   activeTask: null,
   currentCycle: 0,
   config: {
-    working: 25,
+    workTime: 25,
     shortBreakTime: 5,
     longBreakTime: 15,
   },
