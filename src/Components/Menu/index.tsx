@@ -9,6 +9,7 @@ import {
   SunIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { RouterLink } from "../RouterLink";
 
 type AvailableThemes = "dark" | "light";
 export function Menu() {
@@ -23,7 +24,7 @@ export function Menu() {
   };
 
   function handleThemeChange(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) {
     event.preventDefault(); //Não seue o link
 
@@ -39,25 +40,30 @@ export function Menu() {
 
   return (
     <nav className={styles.menu}>
-      <a className={styles.menuLink} href="#" aria-label="Home" title="Home">
-        <HouseIcon />
-      </a>
-      <a
+      <RouterLink
         className={styles.menuLink}
-        href="#"
+        href="/"
+        aria-label="Home"
+        title="Home"
+      >
+        <HouseIcon />
+      </RouterLink>
+      <RouterLink
+        className={styles.menuLink}
+        href="/history/"
         aria-label="Historico"
         title="Historico"
       >
         <HistoryIcon />
-      </a>
-      <a
+      </RouterLink>
+      <RouterLink
         className={styles.menuLink}
-        href="#"
+        href="/settings/"
         aria-label="Settings"
         title="Settings"
       >
         <SettingsIcon />
-      </a>
+      </RouterLink>
       <a
         className={styles.menuLink}
         href="#"

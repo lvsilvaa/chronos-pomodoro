@@ -1,13 +1,15 @@
+import { MessagesContainer } from "./Components/MessagesContainer";
 import { TaskContexProvider } from "./Contexts/TaskContex/TaskContextProvider";
-import { Home } from "./pages/Home";
-
 import "./style/global.css";
 import "./style/theme.css";
+import { MainRouters } from "./Routers/MainRouters";
 
 export function App() {
   return (
     <TaskContexProvider>
-      <Home />;
+      <MessagesContainer>
+        <MainRouters />
+      </MessagesContainer>
     </TaskContexProvider>
   );
 }

@@ -18,3 +18,15 @@
   color: var(--text-default);
   text-decoration: underline;
 }
+
+.footer img {
+  width: 40px;
+  height: 40px;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem; /* menor espaço entre eles */
+}

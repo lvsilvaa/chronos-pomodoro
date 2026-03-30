@@ -1,4 +1,3 @@
-import { CopyCheck } from "lucide-react";
 import { useTaskContext } from "../../Contexts/useTaskContext";
 import { getNextCycle } from "../../util/getNextCycle";
 import { getNextCycleType } from "../../util/getNextCycleType";
@@ -14,6 +13,12 @@ export function Cyrcles() {
     longBreakTime: "descanso longo",
   };
 
+  const cycleStyleMap = {
+    workTime: styles.working,
+    shortBreakTime: styles.shortBreakTime,
+    longBreakTime: styles.longBreakTime,
+  };
+
   return (
     <div className={styles.cycles}>
       <span>Ciclos:</span>
@@ -24,8 +29,8 @@ export function Cyrcles() {
           return (
             <span
               key={`${nextCycleType}_${nextCycle}`}
-              className={`${styles.cyclesDot} ${styles[nextCycleType]}`}
-              arial-label={`Indicador de ciclo de ${cycleDescriptionMap[nextCycleType]}`}
+              className={`${styles.cyclesDot} ${cycleStyleMap[nextCycleType]}`}
+              aria-label={`Indicador de ciclo de ${cycleDescriptionMap[nextCycleType]}`}
               title={`Indicador de ciclo de ${cycleDescriptionMap[nextCycleType]}`}
             ></span>
           );

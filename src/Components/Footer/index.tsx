@@ -1,20 +1,30 @@
 import styles from "./styles.module.css";
+import { RouterLink } from "../RouterLink";
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <a href="#" className={styles.footerLink}>
+      <RouterLink href="/about-pomodoro" className={styles.footerLink}>
         Entenda como funciona a técnica pomodoro
-      </a>
-      <a
-        href="https://github.com/lvsilvaa"
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.footerLink}
-      >
-        Chronos Pomodoro &copy; {new Date().getFullYear()} - Feito por Leonardo
-        Silva
-      </a>
+      </RouterLink>
+      Chronos Pomodoro &copy; {new Date().getFullYear()} - Feito por Leonardo
+      Silva
+      <div className={styles.icons}>
+        <a
+          href="https://github.com/lvsilvaa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="../../imagens/github.png"></img>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/leonardosilva-826083231/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="../../imagens/logolinkedin.png"></img>
+        </a>
+      </div>
     </footer>
   );
 }

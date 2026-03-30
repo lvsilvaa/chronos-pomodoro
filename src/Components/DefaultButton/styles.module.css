@@ -22,7 +22,7 @@
 }
 
 .green {
-  background: var(--primary);
+  background: var(--success);
   color: var(--text-over-primary);
 }
 
