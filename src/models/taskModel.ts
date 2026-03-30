@@ -1,4 +1,4 @@
-import type { TaskStateModel } from "./TaskStateModel";
+import type { CycleType } from "../util/getNextCycleType";
 
 export type TaskModel = {
   id: string;
@@ -7,5 +7,5 @@ export type TaskModel = {
   startDate: number;
   completDate: number | null;
   interruptDate: number | null;
-  type: keyof TaskStateModel["config"];
+  type: CycleType;
 };
